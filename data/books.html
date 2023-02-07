@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Books</title>
+    <link href="css/freemarker.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+    <h1>Список книг компании</h1>
+    <div>
+        <ul style="list-style-type: none;">
+            <#list books as book>
+                <li>Название: ${book.name}</li>
+                <li>
+                    Выдана:
+                        <#if book.takingEmployee??>
+                            ${book.takingEmployee.name} ${book.takingEmployee.surName}
+                        <#else>Не выдана
+                        </#if>
+                </li>
+                <li><a href="#">Информация о книге</a></li>
+                <p></p>
+            </#list>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

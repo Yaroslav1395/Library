@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Books</title>
+    <link href="css/freemarker.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+    <h1>Личный кабинет</h1>
+    <div>
+
+        <ul style="list-style-type: none;">
+            <#list entries as entry>
+                <li>Взял: ${entry.take}</li>
+                <li>Вернул: ${entry.returned}</li>
+                <li>Название книги: ${entry.book.name}</li>
+            </#list>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

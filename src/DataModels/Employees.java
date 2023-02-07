@@ -27,7 +27,7 @@ public class Employees {
     public List<Employee> getEmployees() {
         List<Employee> employeeList = new ArrayList<>(this.employees.size());
         employees.forEach(employee -> employeeList.add(new Employee(
-                employee.getName(), employee.getSurName())));
+                employee.getName(), employee.getSurName(), employee.getEntries())));
         return employeeList;
     }
 
@@ -41,6 +41,6 @@ public class Employees {
 
     public Employee getEmployeeById(int employeeId){
         Employee employee = employees.get(employeeId);
-        return new Employee(employee.getName(), employee.getSurName());
+        return new Employee(employee.getName(), employee.getSurName(), employee.getEntries());
     }
 }

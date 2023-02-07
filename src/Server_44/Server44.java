@@ -110,6 +110,6 @@ public class Server44 extends BasicServer {
     }
     private Employee getEmployeeModel() {
         Library library = FileService.readJsonFile();
-        return null;
+        return library.getEmployees().getEmployeeById(1);
     }
 }

@@ -14,7 +14,7 @@ public class FileService {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();//позволяет привести в читабельный вид
 
     public static Library readJsonFile(){
-        Path parsedPath = Paths.get("data/gson/library.gson");//преобразует String путь в Path путь
+        Path parsedPath = Paths.get("data/gson/library.json");//преобразует String путь в Path путь
         String fileContents;
         try {
             fileContents = Files.readString(parsedPath);//Класс Files предоставляет возможность считать файлы
@@ -28,7 +28,7 @@ public class FileService {
 
     public static void writeJson(Library library){
         String json = gson.toJson(library);//метод преобразует класс в строку для записи в json
-        Path parsedPath = Paths.get("data/gson/library.gson");//преобразует String путь в Path путь
+        Path parsedPath = Paths.get("data/gson/library.json");//преобразует String путь в Path путь
         try {
             byte[] bytes = json.getBytes();//для записи необходимо получить битовое значение строки
             Files.write(parsedPath, bytes);//передаем путь к файлу типом данных Path и битовое значение строки

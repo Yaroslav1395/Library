@@ -1,17 +1,12 @@
 package DataModels;
 
 public class Book {
-    private String name;
-    private String authorName;
-    private String authorSurname;
+    private final String name;
+    private final String authorName;
+    private final String authorSurname;
     private String takingEmployeeName;
     private String takingEmployeeSurname;
 
-    public Book(String name, String authorName, String authorSurname) {
-        this.name = name;
-        this.authorName = authorName;
-        this.authorSurname = authorSurname;
-    }
 
     public Book(String name, String authorName, String authorSurname, String takingEmployeeName, String takingEmployeeSurname) {
         this.name = name;
@@ -57,6 +52,11 @@ public class Book {
                 "\nИмя сотрудника: " + takingEmployeeName +
                 "\nФамилия сотрудника: " + takingEmployeeName + "\n";
     }
+
+    /**
+     *
+     * нужен для проверки при выборе книги клиентом
+     */
     public boolean isTaken(){
         return takingEmployeeName != null;
     }

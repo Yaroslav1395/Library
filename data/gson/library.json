@@ -1,0 +1,160 @@
+{
+  "libraryBooks": {
+    "books": [
+      {
+        "name": "Невидимка",
+        "authorName": "Чак",
+        "authorSurname": "Паланик"
+      },
+      {
+        "name": "Бойцовский клуб",
+        "authorName": "Чак",
+        "authorSurname": "Паланик"
+      },
+      {
+        "name": "Война и мир",
+        "authorName": "Лев",
+        "authorSurname": "Толстой"
+      },
+      {
+        "name": "Азазель",
+        "authorName": "Борис",
+        "authorSurname": "Акунин"
+      },
+      {
+        "name": "Турецкий гамбит",
+        "authorName": "Борис",
+        "authorSurname": "Акунин"
+      },
+      {
+        "name": "Мастер и Маргарита",
+        "authorName": "Михаил",
+        "authorSurname": "Булгаков"
+      },
+      {
+        "name": "Война миров",
+        "authorName": "Герберт",
+        "authorSurname": "Уеллс"
+      },
+      {
+        "name": "1984",
+        "authorName": "Джордж",
+        "authorSurname": "Оруел"
+      }
+    ]
+  },
+  "employees": {
+    "employees": [
+      {
+        "name": "Алексией",
+        "surName": "Криворогов"
+      },
+      {
+        "name": "Анастасия",
+        "surName": "Сумкина",
+        "entries": {
+          "entries": [
+            {
+              "take": "2023-02-07T04:53:32.076525900",
+              "returned": "2023-02-07T04:53:32.076525900",
+              "book": {
+                "name": "Азазель",
+                "authorName": "Борис",
+                "authorSurname": "Акунин",
+                "takingEmployeeName": "Анастасия",
+                "takingEmployeeSurname": "Сумкина"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Михаил",
+        "surName": "Боярский",
+        "entries": {
+          "entries": [
+            {
+              "take": "2023-02-07T04:53:32.076525900",
+              "returned": "2023-02-07T04:53:32.076525900",
+              "book": {
+                "name": "Война миров",
+                "authorName": "Герберт",
+                "authorSurname": "Уеллс",
+                "takingEmployeeName": "Михаил",
+                "takingEmployeeSurname": "Боярский"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Анна",
+        "surName": "Сидакова",
+        "entries": {
+          "entries": [
+            {
+              "take": "2023-02-07T04:53:32.076525900",
+              "returned": "2023-02-07T04:53:32.076525900",
+              "book": {
+                "name": "Невидимка",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Анна",
+                "takingEmployeeSurname": "Сидакова"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Антон",
+        "surName": "Зубарев",
+        "entries": {
+          "entries": [
+            {
+              "take": "2023-02-07T04:53:32.076525900",
+              "returned": "2023-02-07T04:53:32.076525900",
+              "book": {
+                "name": "Турецкий гамбит",
+                "authorName": "Борис",
+                "authorSurname": "Акунин",
+                "takingEmployeeName": "Антон",
+                "takingEmployeeSurname": "Зубарев"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Диана",
+        "surName": "Гаврилова",
+        "entries": {
+          "entries": [
+            {
+              "take": "2023-02-07T04:53:32.076525900",
+              "returned": "2023-02-07T04:53:32.076525900",
+              "book": {
+                "name": "Азазель",
+                "authorName": "Борис",
+                "authorSurname": "Акунин",
+                "takingEmployeeName": "Диана",
+                "takingEmployeeSurname": "Гаврилова"
+              }
+            },
+            {
+              "take": "2023-02-07T04:53:32.076525900",
+              "returned": "2023-02-07T04:53:32.076525900",
+              "book": {
+                "name": "Мастер и Маргарита",
+                "authorName": "Михаил",
+                "authorSurname": "Булгаков",
+                "takingEmployeeName": "Диана",
+                "takingEmployeeSurname": "Гаврилова"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

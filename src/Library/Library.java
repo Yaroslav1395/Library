@@ -28,6 +28,12 @@ public class Library {
     public Employees getEmployees() {
         return new Employees(employees);
     }
+
+
+
+
+
+
     public void createNewEntryAtEmployee(int employeeId, Book book){
         if(book.isTaken()){
             System.out.println("Зашел1");

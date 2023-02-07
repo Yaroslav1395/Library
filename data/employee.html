@@ -13,9 +13,10 @@
 
     <h1>Личный кабинет</h1>
     <div>
-
+        <p>Имя: ${name}</p>
+        <p>Фамилия: ${surName}</p>
         <ul style="list-style-type: none;">
-            <#list entries as entry>
+            <#list entries.getEntries() as entry>
                 <li>Взял: ${entry.take}</li>
                 <li>Вернул: ${entry.returned}</li>
                 <li>Название книги: ${entry.book.name}</li>

@@ -1,4 +1,4 @@
-package Library;
+package DataModels;
 
 import DataModels.Book;
 
@@ -16,6 +16,10 @@ public class Entry {
 
     public String getReturned() {
         return returned;
+    }
+
+    public String getTake() {
+        return take;
     }
 
     public void setReturned(String returned) {

@@ -3,11 +3,30 @@ package DataModels;
 public class Employee {
     private String name;
     private String surName;
-    private Entries entries = new Entries();
+    private String email;
+    private String password;
+    private Entries entries;
 
     public Employee(String name, String surName, Entries entries) {
         this.name = name;
         this.surName = surName;
+        this.entries = entries;
+    }
+
+
+    public Employee(String name, String surName, String email, String password) {
+        this.name = name;
+        this.surName = surName;
+        this.email = email;
+        this.password = password;
+        this.entries = new Entries();
+    }
+
+    public Employee(String name, String surName, String email, String password, Entries entries) {
+        this.name = name;
+        this.surName = surName;
+        this.email = email;
+        this.password = password;
         this.entries = entries;
     }
 
@@ -19,8 +38,16 @@ public class Employee {
         return surName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public Entries getEntries() {
-        return entries;
+        return new Entries(entries);
     }
 
     @Override

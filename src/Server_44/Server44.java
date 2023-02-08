@@ -26,7 +26,6 @@ public class Server44 extends BasicServer {
         registerGet("/sample", this::freemarkerSampleHandler);
         registerGet("/books", this::freemarkerBooksHandler);
         registerGet("/book", this::freemarkerBookHandler);
-        registerGet("/employee", this::freemarkerEmployeeHandler);
     }
 
     private static Configuration initFreeMarker() {
@@ -57,10 +56,7 @@ public class Server44 extends BasicServer {
         renderTemplate(exchange, "books.html", getBooksModel());
     }
     private void freemarkerBookHandler(HttpExchange exchange){
-        renderTemplate(exchange, "book.html", getBookModel());
-    }
-    private void freemarkerEmployeeHandler(HttpExchange exchange){
-        renderTemplate(exchange, "employee.html", getEmployeeModel());
+        ///renderTemplate(exchange, "book.html", getBookModel());
     }
 
     protected void renderTemplate(HttpExchange exchange, String templateFile, Object dataModel) {
@@ -103,13 +99,9 @@ public class Server44 extends BasicServer {
         Library library = FileService.readJsonFile();
         return library.getLibraryBooks();
     }
-    private Book getBookModel(){
+    /*private Book getBookModel(){
         Library library = FileService.readJsonFile();
         return library.getLibraryBooks().returnRandomBookFromBooksList(
                 library.getEmployees().getEmployeeById(1));
-    }
-    private Employee getEmployeeModel() {
-        Library library = FileService.readJsonFile();
-        return library.getEmployees().getEmployeeById(1);
-    }
+    }*/
 }

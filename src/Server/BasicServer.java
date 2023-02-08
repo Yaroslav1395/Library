@@ -1,5 +1,7 @@
 package Server;
 
+import DataModels.Employee;
+import DataModels.Employees;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -56,6 +58,9 @@ public abstract class BasicServer {
     //и реализацию интерфейса RouteHandler в виде лямбды
     protected final void registerGet(String route, RouteHandler handler) {
         getRoutes().put("GET " + route, handler);
+    }
+    protected void registerPost(String route, RouteHandler handler){
+        getRoutes().put("POST " + route, handler);
     }
     protected final void registerFileHandler(String fileExt, ContentType type) {
         registerGet(fileExt, exchange -> sendFile(exchange, makeFilePath(exchange), type));
@@ -129,6 +134,15 @@ public abstract class BasicServer {
             var data = "404 Not found".getBytes();
             sendByteData(exchange, ResponseCodes.NOT_FOUND, ContentType.TEXT_PLAIN, data);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    protected void redirect303(HttpExchange exchange, String path){
+        try {
+            exchange.getResponseHeaders().add("Location", path);
+            exchange.sendResponseHeaders(303, 0);
+            exchange.getResponseBody().close();
+        }catch (IOException e){
             e.printStackTrace();
         }
     }

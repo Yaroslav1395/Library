@@ -1,17 +1,19 @@
 package DataModels;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Employees {
-    private List<Employee> employees = new ArrayList<>();
+    private Map<String, Employee> registeredEmployees = new HashMap<>();
 
     public Employees() {
     }
 
-    public Employees(List<Employee> employees) {
-        this.employees = employees;
+    public Employees(Map<String, Employee> registeredEmployees) {
+        this.registeredEmployees = registeredEmployees;
     }
     /**
      *
@@ -24,23 +26,29 @@ public class Employees {
      *
      * метод get создает копию исходного списка сотрудников для обеспечения инкапсуляции
      */
-    public List<Employee> getEmployees() {
-        List<Employee> employeeList = new ArrayList<>(this.employees.size());
-        employees.forEach(employee -> employeeList.add(new Employee(
-                employee.getName(), employee.getSurName(), employee.getEntries())));
-        return employeeList;
+    public Map<String, Employee> getEmployees() {
+        Map<String, Employee> employeesMap = new HashMap<>();
+        registeredEmployees.forEach((k,v) -> employeesMap.put(k, new Employee(
+                v.getName(),
+                v.getSurName(),
+                v.getEmail(),
+                v.getPassword(),
+                v.getEntries())));
+        return employeesMap;
     }
-
-    public void createNewEntry(int employeeId, Book book){
-        System.out.println("Зашел2");
-        employees.get(employeeId).createEntry(book);
+    public void putNewRegisteredEmployee(Employee employee){
+        registeredEmployees.put(employee.getEmail(), employee);
     }
-    public void updateEntry(int employeeId, Book book){
-        employees.get(employeeId).updateEntry(book);
+    public boolean emailCheck(String email){
+        return registeredEmployees.containsKey(email);
     }
-
-    public Employee getEmployeeById(int employeeId){
-        Employee employee = employees.get(employeeId);
-        return new Employee(employee.getName(), employee.getSurName(), employee.getEntries());
+    public boolean passwordCheck(String email, String password){
+        if(emailCheck(email)){
+            return registeredEmployees.get(email).getPassword().equals(password);
+        }
+        return false;
+    }
+    public Employee getEmployeeByEmail(String email){
+        return registeredEmployees.get(email);
     }
 }

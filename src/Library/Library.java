@@ -29,20 +29,21 @@ public class Library {
         return new Employees(employees);
     }
 
-
-
-
-
-
-    public void createNewEntryAtEmployee(int employeeId, Book book){
-        if(book.isTaken()){
-            System.out.println("Зашел1");
-            libraryBooks.setTakenEmployee(book, employees.getEmployeeById(employeeId));
-            employees.createNewEntry(employeeId, book);
-        }
+    public void addNewRegisteredEmployee(Employee employee){
+        employees.putNewRegisteredEmployee(employee);
     }
-    public void updateEntryAtEmployee(int employeeId, Book book){
-        libraryBooks.removeTakenEmployee(book);
-        employees.updateEntry(employeeId, book);
+
+    public boolean emailCheck(String email){
+        return employees.emailCheck(email);
     }
+    public boolean passwordCheck(String email, String password){
+        return employees.passwordCheck(email, password);
+    }
+    public Employee getEmployeeByEmail(String email){
+        return employees.getEmployeeByEmail(email);
+    }
+    public Employee getPlugEmployee(){
+        return new Employee("Имя", "Фамилия", "Email", "Пароль");
+    }
+
 }

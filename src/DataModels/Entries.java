@@ -6,6 +6,14 @@ import java.util.List;
 
 public class Entries {
     private List<Entry> entries = new ArrayList<>();
+
+    public Entries() {
+    }
+
+    public Entries(Entries entries) {
+        this.entries = entries.getEntries();
+    }
+
     public List<Entry> getEntries() {
         List<Entry> entryList = new ArrayList<>(entries.size());
         entries.forEach(entry -> entryList.add(new Entry(entry.getTake(), entry.getReturned(), entry.getBook())));

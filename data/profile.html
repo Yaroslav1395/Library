@@ -20,12 +20,16 @@
         <ul style="list-style-type: none;">
             <#if entries.getEntries()??>
                 <#list entries.getEntries() as entry>
-                <li>Взял: ${entry.take}</li>
-                <li>Вернул: ${entry.returned}</li>
-                <li>Название книги: ${entry.book.name}</li>
-                <li>
-                    <a href="#">Вернуть книгу</a>
-                </li>
+                    <li>Взял: ${entry.take}</li>
+                    <li>Название книги: ${entry.book.name}</li>
+                    <#if entry.returned??>
+                        <li>Вернул: ${entry.returned}</li>
+                    <#else>
+                        <li>
+                            <a href="http://localhost:9889/profile?bookName=${entry.book.name}">Вернуть</a>
+                        </li>
+                    </#if>
+                    <p></p>
                 </#list>
             </#if>
         </ul>

@@ -3,23 +3,17 @@ package Server_44;
 import DataModels.*;
 import FileServise.FileService;
 import Library.*;
-import Server.BasicServer;
-import Server.Cookie;
+import Server.*;
 import com.sun.net.httpserver.HttpExchange;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
-import Server.ContentType;
-import Server.ResponseCodes;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Server44 extends BasicServer {
@@ -60,17 +54,33 @@ public class Server44 extends BasicServer {
         Library library = FileService.readJsonFile();
 
         Map<String, String> parsedCookie = Cookie.parse(Cookie.getCookies(exchange));
-        String cookieEmail = parsedCookie.get("userEmail");
-        String cookieUserId = parsedCookie.get("userId");
+        String userEmail = parsedCookie.get("userEmail");
+        String userId = parsedCookie.get("userId");
 
-        if(library.userIdCheck(cookieEmail, cookieUserId)){
+        if(library.userIdCheck(userEmail, userId)){
            library.setUserLogin(true);
+        }
+
+        if(library.userHasTwoBook(userEmail)){
+            library.setLoginUserHasTwoBook(true);
+        }
+
+        String query = getQueryParams(exchange);
+
+        if(query.length() > 0){
+            Map<String, String> parsed = Utils.parseUrlEncoded(query, "&");
+            library.takeBook(userEmail, Integer.parseInt(parsed.get("index")));
+            FileService.writeJson(library);
         }
 
         renderTemplate(exchange, "books.html", library.getLibraryBooks());
     }
     private void freemarkerBookHandler(HttpExchange exchange){
-        ///renderTemplate(exchange, "book.html", getBookModel());
+        Library library = FileService.readJsonFile();
+        String queryParams = getQueryParams(exchange);
+        Map<String, String> queryMap = Utils.parseUrlEncoded(queryParams, "&");
+        Book book = library.getBookByIndex(Integer.parseInt(queryMap.get("index")));
+        renderTemplate(exchange, "book.html", book);
     }
 
     protected void renderTemplate(HttpExchange exchange, String templateFile, Object dataModel) {

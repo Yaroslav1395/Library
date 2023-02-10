@@ -60,9 +60,20 @@ public class Library {
     public void setLoginUserHasTwoBook(boolean bool){
         libraryBooks.setLoginUserHasTwoBook(bool);
     }
-    public boolean userHasTwoBook(String userId){
-        if(userId == null) return false;
-        return employees.userHasTwoBooks(userId);
+    public boolean userHasTwoBook(String userEmail){
+        if(userEmail == null) return false;
+        return employees.userHasTwoBooks(userEmail);
+    }
+    public Book getBookByIndex(int index){
+        return libraryBooks.getBookByIndex(index);
+    }
+    public void takeBook(String userEmail, int bookIndex){
+        libraryBooks.setTakenEmployee(employees.getEmployeeByEmail(userEmail), bookIndex);
+        employees.createEntry(libraryBooks.getBookByIndex(bookIndex), userEmail);
+    }
+    public void returnBook(String userEmail, String bookName){
+        libraryBooks.removeTakenEmployee(bookName);
+        employees.updateEntry(bookName, userEmail);
     }
 
 }

@@ -1,9 +1,9 @@
 package DataModels;
 
 public class Book {
-    private final String name;
-    private final String authorName;
-    private final String authorSurname;
+    private String name;
+    private String authorName;
+    private String authorSurname;
     private String takingEmployeeName;
     private String takingEmployeeSurname;
 
@@ -14,6 +14,14 @@ public class Book {
         this.authorSurname = authorSurname;
         this.takingEmployeeName = takingEmployeeName;
         this.takingEmployeeSurname = takingEmployeeSurname;
+    }
+
+    public Book(Book book) {
+        name = book.getName();
+        authorName = book.getAuthorName();
+        authorSurname = book.getAuthorSurname();
+        takingEmployeeName = book.getTakingEmployeeName();
+        takingEmployeeSurname = book.getTakingEmployeeSurname();
     }
 
     public String getName() {
@@ -50,7 +58,7 @@ public class Book {
                 "\nИмя автора: " + authorName +
                 "\nФамилия автора: " + authorSurname +
                 "\nИмя сотрудника: " + takingEmployeeName +
-                "\nФамилия сотрудника: " + takingEmployeeName + "\n";
+                "\nФамилия сотрудника: " + takingEmployeeSurname + "\n";
     }
 
     /**
@@ -59,5 +67,16 @@ public class Book {
      */
     public boolean isTaken(){
         return takingEmployeeName != null;
+    }
+    public void removeTakenEmployee(){
+        takingEmployeeName = null;
+        takingEmployeeSurname = null;
+    }
+    public void setTakenEmployee(Employee employee){
+        takingEmployeeName = employee.getName();
+        takingEmployeeSurname = employee.getSurName();
+    }
+    public boolean isBookHasTakenEmployee(){
+        return takingEmployeeName == null;
     }
 }

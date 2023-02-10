@@ -41,26 +41,9 @@ public class Books {
         )));
         return bookListCopy;
     }
-    /**
-     *
-     * метод создает копию случайной книги из списка и возвращает ее
-     */
-    public Book returnRandomBookFromBooksList(Employee employee){
-        int random = new Random().nextInt(books.size() - 1);
-        if(books.get(random).getTakingEmployeeName() == null){
-            books.get(random).setTakingEmployeeName(employee.getName());
-            books.get(random).setTakingEmployeeSurname(employee.getSurName());
-            Book book = books.get(random);
-            return new Book(
-                    book.getName(),
-                    book.getAuthorName(),
-                    book.getAuthorSurname(),
-                    book.getTakingEmployeeName(),
-                    book.getTakingEmployeeSurname());
-        }else {
-            returnRandomBookFromBooksList(employee);
-        }
-        return null;
+
+    public Book getBookByIndex(int index){
+        return new Book(books.get(index));
     }
 
     public boolean isUserLogin() {
@@ -78,24 +61,24 @@ public class Books {
     public void setLoginUserHasTwoBook(boolean loginUserHasTwoBook) {
         isLoginUserHasTwoBook = loginUserHasTwoBook;
     }
-
-    public void setTakenEmployee(Book book, Employee employee){
-        for (Book bookFromList: books) {
-            if(bookFromList == book){
-                bookFromList.setTakingEmployeeName(employee.getName());
-                bookFromList.setTakingEmployeeSurname(employee.getSurName());
+    public int getIndexOfBookByName(String name){
+        for (Book book: books) {
+            if(book.getName().equals(name)){
+                return books.indexOf(book);
+            }
+        }
+        return 0;
+    }
+    public void removeTakenEmployee(String bookName){
+        for (Book book : books) {
+            if(book.getName().equals(bookName)){
+                book.removeTakenEmployee();
+                isLoginUserHasTwoBook = false;
                 break;
             }
         }
     }
-    public void removeTakenEmployee(Book book){
-        for (Book bookFromList: books) {
-            if(bookFromList == book){
-                bookFromList.setTakingEmployeeName(null);
-                bookFromList.setTakingEmployeeSurname(null);
-                break;
-            }
-        }
+    public void setTakenEmployee(Employee employee, int index){
+        books.get(index).setTakenEmployee(employee);
     }
-
 }

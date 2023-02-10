@@ -66,18 +66,17 @@ public class Employee {
     public void createEntry(Book book){
         entries.createEntry(book);
     }
-    public void updateEntry(Book book){
-        entries.updateEntry(book);
+    public void updateEntry(String bookName){
+        entries.updateEntry(bookName);
     }
     public boolean userIdCheck(String userId){
         if(userId == null){
             return false;
         }
-        System.out.println(userId.equals(this.userId));
-        System.out.println(this.userId);
         return userId.equals(this.userId);
     }
     public boolean userHasTwoBook(){
         return entries.userHasTwoBook();
     }
+
 }

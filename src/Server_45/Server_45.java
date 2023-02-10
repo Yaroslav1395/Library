@@ -96,9 +96,20 @@ public class Server_45 extends Server44 {
     }
     private void freemarkerEmployeeHandler(HttpExchange exchange){
         Library library = FileService.readJsonFile();
+
         Map<String, String> parsed = Cookie.parse(getCookies(exchange));
+
         String emailId = parsed.getOrDefault("userId", null);
         String email =  parsed.getOrDefault("userEmail", null);
+
+        String query = getQueryParams(exchange);
+
+        if(query.length() > 1){
+            Map<String, String> parseQuery = Utils.parseUrlEncoded(query, "&");
+            library.returnBook(email, parseQuery.get("bookName"));
+            FileService.writeJson(library);
+        }
+
         if(library.userIdCheck(email, emailId)){
             renderTemplate(exchange, "profile.html", getEmployeeModel(email));
         }else{

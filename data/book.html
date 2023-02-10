@@ -17,12 +17,13 @@
         <p>Имя автора: ${authorName}</p>
         <p>Фамилия автора: ${authorSurname}</p>
         <p>Выдана:
-            <#if takingEmployee??>
-                ${takingEmployee.name} ${takingEmployee.surName}
+            <#if takingEmployeeName??>
+                ${takingEmployeeName} ${takingEmployeeSurname}
             <#else>
                 Не выдана
             </#if>
         </p>
+        <a href="http://localhost:9889/books">Перейти в библиотеку</a>
     </div>
 
 </div>

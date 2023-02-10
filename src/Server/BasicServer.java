@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class BasicServer {
 
@@ -53,15 +54,20 @@ public abstract class BasicServer {
         registerFileHandler(".png", ContentType.IMAGE_PNG);
 
     }
+    protected final void registerGenericHandler(String method, String route, RouteHandler handler) {
+        getRoutes().put(makeKey(method, route), handler);
+    }
+
 
     //метод помещает в мапу ключ в виде наименования запроса с метод GET + адрес
     //и реализацию интерфейса RouteHandler в виде лямбды
     protected final void registerGet(String route, RouteHandler handler) {
-        getRoutes().put("GET " + route, handler);
+        registerGenericHandler("GET", route, handler);
     }
-    protected void registerPost(String route, RouteHandler handler){
-        getRoutes().put("POST " + route, handler);
+    protected final void registerPost(String route, RouteHandler handler) {
+        registerGenericHandler("POST", route, handler);
     }
+
     protected final void registerFileHandler(String fileExt, ContentType type) {
         registerGet(fileExt, exchange -> sendFile(exchange, makeFilePath(exchange), type));
     }
@@ -108,21 +114,28 @@ public abstract class BasicServer {
     private static void setContentType(HttpExchange exchange, ContentType type) {
         exchange.getResponseHeaders().set("Content-Type", String.valueOf(type));
     }
-    //метод возвращает строку объединяя метод запроса и адрес от клиента
-    private static String makeKey(String method, String route) {
-        return String.format("%s %s", method.toUpperCase(), route);
-    }
-    //метод принимает HttpExchange и получает метод запроса и адрес от клиента
-    //проверяя есть ли у пути расширение фйла (если есть вернет тип расширения)
+
     private static String makeKey(HttpExchange exchange) {
-        var method = exchange.getRequestMethod();
-        var path = exchange.getRequestURI().getPath();
-
-        var index = path.lastIndexOf(".");
-        var extOrPath = index != -1 ? path.substring(index).toLowerCase() : path;
-
+        String method = exchange.getRequestMethod();
+        String path = exchange.getRequestURI().getPath();
+        // уберём конечную косую черту если она есть
+        if (path.endsWith("/") && path.length() > 1) {
+            path = path.substring(0, path.length() - 1);
+        }
+        int index = path.lastIndexOf(".");
+        String extOrPath = index != -1 ? path.substring(index).toLowerCase() : path;
         return makeKey(method, extOrPath);
     }
+    protected static String makeKey(String method, String route) {
+        route = ensureStartsWithSlash(route);
+        return String.format("%s %s", method.toUpperCase(), route);
+    }
+    private static String ensureStartsWithSlash(String route){
+        if (route.startsWith("."))
+            return route;
+        return route.startsWith("/") ? route : "/" + route;
+    }
+
 
     private void handleIndexIncomingServerRequests(HttpExchange exchange) {
         var route = getRoutes().getOrDefault(makeKey(exchange), this::respond404);
@@ -146,6 +159,11 @@ public abstract class BasicServer {
             e.printStackTrace();
         }
     }
+    protected String getQueryParams(HttpExchange exchange) {
+        String query = exchange.getRequestURI().getQuery();
+        return Objects.nonNull(query) ? query : "";
+    }
+
     public final void start() {
         server.start();
     }

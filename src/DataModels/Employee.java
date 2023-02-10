@@ -6,6 +6,7 @@ public class Employee {
     private String email;
     private String password;
     private Entries entries;
+    private String userId;
 
     public Employee(String name, String surName, Entries entries) {
         this.name = name;
@@ -50,6 +51,14 @@ public class Employee {
         return new Entries(entries);
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "Имя: " + name + "\nФамилия: " + surName + '\n';
@@ -59,5 +68,16 @@ public class Employee {
     }
     public void updateEntry(Book book){
         entries.updateEntry(book);
+    }
+    public boolean userIdCheck(String userId){
+        if(userId == null){
+            return false;
+        }
+        System.out.println(userId.equals(this.userId));
+        System.out.println(this.userId);
+        return userId.equals(this.userId);
+    }
+    public boolean userHasTwoBook(){
+        return entries.userHasTwoBook();
     }
 }

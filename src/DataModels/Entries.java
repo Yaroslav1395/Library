@@ -34,4 +34,10 @@ public class Entries {
             }
         }
     }
+    public boolean userHasTwoBook(){
+        if(entries.isEmpty()) return false;
+        return 3 >= (int) entries.stream()
+                .filter(entry -> entry.getReturned() == null)
+                .count();
+    }
 }

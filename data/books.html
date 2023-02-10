@@ -13,17 +13,25 @@
 
     <h1>Список книг компании</h1>
     <div>
+        <#assign isUserLogin = isUserLogin()>
+        <#assign isLoginUserHasTwoBook = isLoginUserHasTwoBook()>
         <ul style="list-style-type: none;">
             <#list books as book>
-                <li>Название: ${book.name}</li>
+                <li> Название: ${book.name}</li>
                 <li>
                     Выдана:
-                        <#if book.takingEmployee??>
-                            ${book.takingEmployee.name} ${book.takingEmployee.surName}
-                        <#else>Не выдана
-                        </#if>
+                    <#if book.takingEmployee??>
+                        ${book.takingEmployee.name} ${book.takingEmployee.surName}
+                    <#else>
+                        Не выдана
+                    </#if>
                 </li>
-                <li><a href="#">Информация о книге</a></li>
+                <li>
+                    <a href="#">Информация о книге</a>
+                </li>
+                <#if isUserLogin == true && isLoginUserHasTwoBook != true>
+                    <li><a href="#">Взять книгу</a></li>
+                </#if>
                 <p></p>
             </#list>
         </ul>

@@ -51,4 +51,13 @@ public class Employees {
     public Employee getEmployeeByEmail(String email){
         return registeredEmployees.get(email);
     }
+    public void setEmployeeUserId(String email, String userId){
+        registeredEmployees.get(email).setUserId(userId);
+    }
+    public boolean userIdCheck(String email, String userId){
+        return registeredEmployees.get(email).userIdCheck(userId);
+    }
+    public boolean userHasTwoBooks(String email){
+        return registeredEmployees.get(email).userHasTwoBook();
+    }
 }

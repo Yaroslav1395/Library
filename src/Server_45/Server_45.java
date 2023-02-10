@@ -4,9 +4,7 @@ import DataModels.Employee;
 import DataModels.Employees;
 import FileServise.FileService;
 import Library.Library;
-import Server.ContentType;
-import Server.ResponseCodes;
-import Server.Utils;
+import Server.*;
 import Server_44.Server44;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -16,10 +14,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
+import static Server.Cookie.getCookies;
+import static Server.Cookie.setCookie;
 import static java.util.stream.Collectors.joining;
 
 public class Server_45 extends Server44 {
@@ -32,6 +34,7 @@ public class Server_45 extends Server44 {
         registerGet("/successfulRegistration", this::successfulRegistrationGet);
         registerGet("/failedRegistration", this::failedRegistrationGet);
         registerGet("/profile", this::freemarkerEmployeeHandler);
+        registerPost("/profile", this::employeePost);
     }
 
     private void loginGet(HttpExchange exchange){
@@ -40,11 +43,24 @@ public class Server_45 extends Server44 {
     }
     private void loginPost(HttpExchange exchange){
         Library library = FileService.readJsonFile();
+
         String loginInfo = getBody(exchange);
+
         Map<String, String> parsedInfo = Utils.parseUrlEncoded(loginInfo, "&");
+
         if(library.passwordCheck(parsedInfo.get("email"), parsedInfo.get("password"))){
+
+            String encrypted = CodeGenerator.makeCode(parsedInfo.get("email") + new Random().nextInt(10000));
+
+            setCookie(exchange, Cookie.make("userId", encrypted, 300));
+            setCookie(exchange, Cookie.make("userEmail", parsedInfo.get("email"), 300));
+
+            library.setEmployeeUserId(parsedInfo.get("email"), encrypted);
+
             Employee employee = library.getEmployeeByEmail(parsedInfo.get("email"));
             renderTemplate(exchange, "profile.html", employee);
+
+            FileService.writeJson(library);
         }else {
             redirect303(exchange, "/login");
         }
@@ -72,18 +88,32 @@ public class Server_45 extends Server44 {
                     parsedInfo.get("email"),
                     parsedInfo.get("password"))
             );
-            redirect303(exchange, "/successfulRegistration");
+            redirect303(exchange, "/profile");
             FileService.writeJson(library);
         }else {
             redirect303(exchange, "/failedRegistration");
         }
     }
     private void freemarkerEmployeeHandler(HttpExchange exchange){
-        renderTemplate(exchange, "profile.html", getEmployeeModel());
-    }
-    private Employee getEmployeeModel() {
         Library library = FileService.readJsonFile();
-        return library.getPlugEmployee();
+        Map<String, String> parsed = Cookie.parse(getCookies(exchange));
+        String emailId = parsed.getOrDefault("userId", null);
+        String email =  parsed.getOrDefault("userEmail", null);
+        if(library.userIdCheck(email, emailId)){
+            renderTemplate(exchange, "profile.html", getEmployeeModel(email));
+        }else{
+            redirect303(exchange, "/login");
+        }
+    }
+    private void employeePost(HttpExchange exchange){
+        setCookie(exchange, Cookie.make("userId", 0, 0));
+        setCookie(exchange, Cookie.make("userEmail", 0, 0));
+
+        redirect303(exchange, "/login");
+    }
+    private Employee getEmployeeModel(String userEmail) {
+        Library library = FileService.readJsonFile();
+        return library.getEmployeeByEmail(userEmail);
     }
     public static String getContentType(HttpExchange exchange){
         return exchange.getRequestHeaders()
@@ -100,4 +130,5 @@ public class Server_45 extends Server44 {
         }
         return "";
     }
+
 }

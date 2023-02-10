@@ -4,6 +4,7 @@ import DataModels.*;
 import FileServise.FileService;
 import Library.*;
 import Server.BasicServer;
+import Server.Cookie;
 import com.sun.net.httpserver.HttpExchange;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -16,7 +17,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Server44 extends BasicServer {
     private final static Configuration freemarker = initFreeMarker();
@@ -53,7 +57,17 @@ public class Server44 extends BasicServer {
         renderTemplate(exchange, "sample.html", getSampleDataModel());
     }
     private void freemarkerBooksHandler(HttpExchange exchange){
-        renderTemplate(exchange, "books.html", getBooksModel());
+        Library library = FileService.readJsonFile();
+
+        Map<String, String> parsedCookie = Cookie.parse(Cookie.getCookies(exchange));
+        String cookieEmail = parsedCookie.get("userEmail");
+        String cookieUserId = parsedCookie.get("userId");
+
+        if(library.userIdCheck(cookieEmail, cookieUserId)){
+           library.setUserLogin(true);
+        }
+
+        renderTemplate(exchange, "books.html", library.getLibraryBooks());
     }
     private void freemarkerBookHandler(HttpExchange exchange){
         ///renderTemplate(exchange, "book.html", getBookModel());

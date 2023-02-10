@@ -20,21 +20,24 @@
                 <li> Название: ${book.name}</li>
                 <li>
                     Выдана:
-                    <#if book.takingEmployee??>
-                        ${book.takingEmployee.name} ${book.takingEmployee.surName}
+                    <#if book.takingEmployeeName??>
+                        ${book.takingEmployeeSurname} ${book.takingEmployeeName}
                     <#else>
                         Не выдана
                     </#if>
                 </li>
                 <li>
-                    <a href="#">Информация о книге</a>
+                    <#assign bookIndex = getIndexOfBookByName(book.name)>
+                    <a href="http://localhost:9889/book?index=${bookIndex}">Информация о книге</a>
                 </li>
-                <#if isUserLogin == true && isLoginUserHasTwoBook != true>
-                    <li><a href="#">Взять книгу</a></li>
+                <#assign employee = book.isBookHasTakenEmployee()>
+                <#if isUserLogin == true && isLoginUserHasTwoBook == false && employee == true>
+                    <li><a href="http://localhost:9889/books?index=${bookIndex}">Взять книгу</a></li>
                 </#if>
                 <p></p>
             </#list>
         </ul>
+        <a href="http://localhost:9889/profile">Перейти в профиль</a>
     </div>
 
 </div>

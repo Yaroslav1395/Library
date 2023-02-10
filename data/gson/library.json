@@ -51,9 +51,153 @@
         "email": "sakhno.yaroslav.13.95@gmail.com",
         "password": "123qweasd",
         "entries": {
-          "entries": []
+          "entries": [
+            {
+              "take": "2023-02-10T23:05:32.490890900",
+              "returned": "2023-02-10T23:50:57.914260300",
+              "book": {
+                "name": "Невидимка",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-10T23:05:37.623025600",
+              "returned": "2023-02-10T23:51:02.849094600",
+              "book": {
+                "name": "Бойцовский клуб",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:33:41.568070100",
+              "returned": "2023-02-11T00:34:00.853479900",
+              "book": {
+                "name": "Война и мир",
+                "authorName": "Лев",
+                "authorSurname": "Толстой",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:33:44.336084800",
+              "returned": "2023-02-11T00:34:02.460485100",
+              "book": {
+                "name": "Азазель",
+                "authorName": "Борис",
+                "authorSurname": "Акунин",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:33:46.637828400",
+              "returned": "2023-02-11T00:34:03.865365200",
+              "book": {
+                "name": "Турецкий гамбит",
+                "authorName": "Борис",
+                "authorSurname": "Акунин",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:34:12.094472200",
+              "returned": "2023-02-11T00:34:34.765484500",
+              "book": {
+                "name": "Невидимка",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:34:16.680154",
+              "returned": "2023-02-11T00:34:36.421316",
+              "book": {
+                "name": "Бойцовский клуб",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:34:18.488155100",
+              "returned": "2023-02-11T00:34:37.669105300",
+              "book": {
+                "name": "Война и мир",
+                "authorName": "Лев",
+                "authorSurname": "Толстой",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:35:48.472806400",
+              "returned": "2023-02-11T00:36:05.316263800",
+              "book": {
+                "name": "Невидимка",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:35:49.844207500",
+              "returned": "2023-02-11T00:36:07.246572800",
+              "book": {
+                "name": "Бойцовский клуб",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T00:41:06.231532300",
+              "returned": "2023-02-11T00:45:32.199148900",
+              "book": {
+                "name": "Невидимка",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T01:04:52.615556700",
+              "returned": "2023-02-11T01:06:39.189600400",
+              "book": {
+                "name": "Невидимка",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            },
+            {
+              "take": "2023-02-11T01:04:53.944138",
+              "returned": "2023-02-11T01:06:40.890925500",
+              "book": {
+                "name": "Бойцовский клуб",
+                "authorName": "Чак",
+                "authorSurname": "Паланик",
+                "takingEmployeeName": "Ярослав ",
+                "takingEmployeeSurname": "Сахно"
+              }
+            }
+          ]
         },
-        "userId": "716c7d3"
+        "userId": "51384e20"
       },
       "sakhno.andrey.13.95@gmail.com": {
         "name": "Андрей ",

@@ -26,9 +26,9 @@ public class Entries {
         entries.add(new Entry(LocalDateTime.now().toString(), null, book));
 
     }
-    public void updateEntry(Book book){
+    public void updateEntry(String book){
         for (Entry entry: entries) {
-            if(entry.getBook() == book && entry.getReturned() == null){
+            if(entry.getBook().getName().equals(book) && entry.getReturned() == null){
                 entry.setReturned(LocalDateTime.now().toString());
                 break;
             }
@@ -36,7 +36,7 @@ public class Entries {
     }
     public boolean userHasTwoBook(){
         if(entries.isEmpty()) return false;
-        return 3 >= (int) entries.stream()
+        return 1 <= (int) entries.stream()
                 .filter(entry -> entry.getReturned() == null)
                 .count();
     }

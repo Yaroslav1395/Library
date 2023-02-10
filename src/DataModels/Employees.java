@@ -60,4 +60,10 @@ public class Employees {
     public boolean userHasTwoBooks(String email){
         return registeredEmployees.get(email).userHasTwoBook();
     }
+    public void createEntry(Book book, String userEmail){
+        registeredEmployees.get(userEmail).createEntry(book);
+    }
+    public void updateEntry(String book, String userEmail){
+        registeredEmployees.get(userEmail).updateEntry(book);
+    }
 }

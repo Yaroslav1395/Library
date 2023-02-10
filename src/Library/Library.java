@@ -45,5 +45,24 @@ public class Library {
     public Employee getPlugEmployee(){
         return new Employee("Имя", "Фамилия", "Email", "Пароль");
     }
+    public void setEmployeeUserId(String email, String userId){
+        employees.setEmployeeUserId(email, userId);
+    }
+    public boolean userIdCheck(String email, String userId){
+        if(email == null){
+            return false;
+        }
+        return employees.userIdCheck(email, userId);
+    }
+    public void setUserLogin(boolean bool){
+        libraryBooks.setUserLogin(bool);
+    }
+    public void setLoginUserHasTwoBook(boolean bool){
+        libraryBooks.setLoginUserHasTwoBook(bool);
+    }
+    public boolean userHasTwoBook(String userId){
+        if(userId == null) return false;
+        return employees.userHasTwoBooks(userId);
+    }
 
 }

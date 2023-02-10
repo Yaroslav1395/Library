@@ -23,9 +23,18 @@
                 <li>Взял: ${entry.take}</li>
                 <li>Вернул: ${entry.returned}</li>
                 <li>Название книги: ${entry.book.name}</li>
+                <li>
+                    <a href="#">Вернуть книгу</a>
+                </li>
                 </#list>
             </#if>
         </ul>
+        <p>
+            <a href="http://localhost:9889/books">Перейти в библиотеку</a>
+        </p>
+        <form action="/profile" method="post">
+            <button>Выход</button>
+        </form>
     </div>
 
 </div>
